@@ -42,16 +42,9 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-           
-            docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            
-            docker stop frontend backend || true
-            docker rm frontend backend || true
-            
-           
+            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            docker rm -f frontend backend || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/techshop-backend:latest
             docker pull ${{ secrets.DOCKER_USERNAME }}/techshop-frontend:latest
-            
-            
             docker run -d --name backend -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/techshop-backend:latest
             docker run -d --name frontend -p 80:80 ${{ secrets.DOCKER_USERNAME }}/techshop-frontend:latest
