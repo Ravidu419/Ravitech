@@ -5,17 +5,18 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
-app.use(cors()); 
-app.use(express.json()); 
+app.use(cors());
+app.use(express.json());
 
-// Routes
-// 💡 මෙතන ඔයාගේ අනිත් routes (authRoutes, productRoutes) තියෙනවා නම් ඒවා විතරක් තියාගන්න.
+// --- 1. ROUTES IMPORTS (මේ තුනම තියෙන්න ඕනේ) ---
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
+// --- 2. ROUTES USE (මේ පාරවල් තුනම පෙන්නන්න ඕනේ) ---
+app.use('/api/auth', authRoutes);      // Login & Signup සඳහා
+app.use('/api/products', productRoutes); // බඩු පෙන්වන්න
+app.use('/api/orders', orderRoutes);     // ඕඩර් දාන්න
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)

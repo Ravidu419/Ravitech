@@ -2,7 +2,6 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Product = require('./models/Product');
 
-
 const products = [
   {
     name: "Apple iPhone 15",
@@ -39,37 +38,35 @@ const products = [
     category: "Accessories",
     description: "Ergonomic wired gaming mouse with RGB."
   },
-
-   {
+  {
     name: "Mechanical Keyboard",
     price: "Rs. 15,000",
     image: "/images/key.jpg" ,
     category: "Accessories",
     description: "Description for Mechanical Keyboard."
   },
-    {
+  {
     name: "Iphone 17 Pro Max",
     price: "Rs. 615,000",
     image: "/images/i17.jpg" ,
     category: "Mobile",
     description: "Description for Iphone 17 Pro Max."
   },
-
-     {
+  {
     name: "Gaming Monitor",
     price: "Rs. 125,000",
     image: "/images/moniter.jpg" ,
     category: "Accessories",
     description: "Description for Gaming Monitor."
   },
-     {
+  {
     name: "samsung Galaxy S24",
     price: "Rs. 295,000",
     image: "/images/s24.jpg" ,
     category: "Mobile",
     description: "Description for Samsung Galaxy S24."
   },
-     {
+  {
     name: "HP pavilion Laptop",
     price: "Rs. 215,000",
     image: "/images/hp.jpg" ,
@@ -85,24 +82,24 @@ const products = [
   }
 ];
 
+// logic to upload initial products to DB
 const seedDB = async () => {
   try {
-    console.log("⏳ Connecting to MongoDB...");
+    console.log("Connecting to Database...");
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("✅ Database connected!");
+    console.log("✅ DB connection success!");
 
-    console.log("⏳ Cleaning old products...");
+    console.log("Clearing existing product data...");
     await Product.deleteMany({});
-    console.log("✅ Old products removed!");
-
-    console.log("⏳ Inserting new products...");
+    
+    console.log("Uploading new products to store...");
     await Product.insertMany(products);
-    console.log("✅ Successfully uploaded all products to MongoDB!");
+    console.log("✅ Products added successfully!");
 
     mongoose.connection.close();
-    console.log("👋 Process finished.");
+    console.log("Connection closed. Seed process done.");
   } catch (err) {
-    console.error("❌ ERROR:", err.message);
+    console.error("❌ Something went wrong:", err.message);
     process.exit(1);
   }
 };

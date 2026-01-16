@@ -16,7 +16,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/products`);
-        // ලැයිස්තුවෙන් අදාළ product එක සොයාගැනීම
+        
         const foundProduct = res.data.find(p => p._id === id);
         setProduct(foundProduct);
       } catch (err) {

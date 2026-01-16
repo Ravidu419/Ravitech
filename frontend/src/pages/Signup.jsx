@@ -8,14 +8,14 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // පේජ් එක Refresh වීම නවත්වනවා
+    e.preventDefault();
     
     if (!formData.name || !formData.email || !formData.password) {
       return toast.error("Please fill all fields!");
     }
 
     try {
-      // URL එක හරියටම 'auth' ලෙස තිබිය යුතුයි
+      
       const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
       
       if (res.status === 201 || res.data.message === "Success") {
@@ -32,9 +32,9 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
       <div className="max-w-md w-full bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
         <h2 className="text-3xl font-black text-slate-800 mb-2 text-center">Create Account</h2>
-        <p className="text-slate-400 mb-8 font-medium text-center">Join <span className="text-blue-600 mb-8 font-bold text-center">RAVI</span><span className="text-slate-600 mb-8 font-bold text-center">TECH.com</span>  today!</p>
+        <p className="text-slate-400 mb-8 font-medium text-center">Join <span className="text-blue-600 mb-8 font-bold text-center">RAVI</span><span className="text-slate-600 mb-8 font-bold text-center">TECH.lk</span>  today!</p>
         
-        {/* onSubmit එක මෙතන තියෙන්න ඕනේ */}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <input 
             type="text" 
@@ -59,7 +59,7 @@ const Signup = () => {
             onChange={(e) => setFormData({...formData, password: e.target.value})}
             required
           />
-          {/* type="submit" එක අනිවාර්යයි */}
+          
           <button 
             type="submit" 
             className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"

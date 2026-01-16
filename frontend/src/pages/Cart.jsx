@@ -6,19 +6,34 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
   const { cart, removeFromCart, updateQty } = useCart();
   const navigate = useNavigate();
 
-  // මුළු ගණන ගණනය කිරීම
+  // helper function to calculate total price
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
+      // cleaning price string if it contains "Rs." or commas
       const price = typeof item.price === 'string' 
         ? parseInt(item.price.replace(/[^0-9]/g, "")) 
         : item.price;
       return total + (price * item.qty);
     }, 0);
+  };
+
+  const handleCheckout = () => {
+    const userData = localStorage.getItem('user');
+    
+    // check if user is logged in before proceeding
+    if (!userData) {
+      toast.error("Please login to checkout!");
+      return navigate('/login');
+    }
+
+    // redirect to order details to fill address
+    navigate('/order-details');
   };
 
   return (
@@ -28,7 +43,7 @@ const Cart = () => {
         
         <button 
           onClick={() => navigate('/home')}
-          className="flex items-center gap-2 mb-8 text-gray-600 hover:text-blue-600 transition-all font-semibold group"
+          className="flex items-center gap-2 mb-8 text-gray-600 hover:text-blue-600 font-semibold group"
         >
           <div className="bg-white p-2 rounded-full shadow-sm group-hover:shadow-md transition-all">
             <ArrowBackIosNewIcon sx={{ fontSize: 18 }} />
@@ -51,7 +66,7 @@ const Cart = () => {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             
-            {/* Left Side: Items List */}
+            {/* Cart Items List */}
             <div className="lg:col-span-2 space-y-4">
               {cart.map((item) => (
                 <div key={item._id} className="bg-white p-5 rounded-2xl shadow-sm flex items-center gap-6 border border-transparent hover:border-blue-100 transition-all">
@@ -79,7 +94,7 @@ const Cart = () => {
               ))}
             </div>
 
-            {/* Right Side: Summary Card */}
+            {/* Summary Section */}
             <div className="lg:col-span-1">
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 sticky top-24">
                 <h3 className="text-2xl font-bold mb-6 text-gray-800">Order Summary</h3>
@@ -100,7 +115,7 @@ const Cart = () => {
                 </div>
                 
                 <button 
-                  onClick={() => alert("Checkout Feature Coming Soon!")}
+                  onClick={handleCheckout}
                   className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 hover:shadow-xl transition-all active:scale-95"
                 >
                   Proceed to Checkout

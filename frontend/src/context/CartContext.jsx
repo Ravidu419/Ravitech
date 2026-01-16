@@ -4,17 +4,17 @@ import toast from 'react-hot-toast';
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  // loading initial cart state from local storage
   const [cart, setCart] = useState(() => {
-    // 💡 මෙතන නම 'cart' ලෙසම තියාගමු (Navbar එකේ මකන නමමයි)
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+  // sync cart state with local storage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  // 🛡️ අලුතින් ඇඩ් කළා: Logout වෙද්දී කාර්ට් එක Reset කිරීමට
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem('cart');
@@ -32,15 +32,7 @@ export const CartProvider = ({ children }) => {
       return [...prevCart, { ...product, qty: 1 }];
     });
 
-    toast.success(`${product.name} Added! 🛒`, {
-      duration: 2000,
-      position: 'top-right',
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-      },
-    });
+    toast.success(`${product.name} Added! 🛒`);
   };
 
   const removeFromCart = (productId) => {

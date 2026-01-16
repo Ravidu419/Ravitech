@@ -8,7 +8,7 @@ import { useCart } from '../context/CartContext';
 
 const Navbar = ({ onSearch }) => {
   const navigate = useNavigate();
-  const { cart } = useCart(); // 👈 මෙතන ඔයාට setCart එකත් ගන්න පුළුවන් නම් වඩා හොඳයි
+  const { cart } = useCart(); 
   const [userName, setUserName] = useState('Guest');
 
   useEffect(() => {
@@ -18,28 +18,19 @@ const Navbar = ({ onSearch }) => {
         const user = JSON.parse(userData);
         setUserName(user.name || 'Guest');
       } catch (error) {
-        console.error('Failed to parse user:', error);
         setUserName('Guest');
       }
     }
   }, []);
 
-  // 🛡️ Logout වෙද්දී කාර්ට් එකත් මකමු
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('cart'); // 👈 මේ පේළිය අනිවාර්යයෙන්ම දාන්න
-    
-    // බ්‍රවුසරයේ තියෙන state එක refresh කරන්න පේජ් එක reload කරන එක ලේසියි
+    localStorage.clear(); // clearing everything at once
     window.location.href = '/login'; 
-  };
-
-  const handleProfileClick = () => {
-    navigate('/profile');
   };
 
   return (
     <nav className="bg-blue-600 p-4 text-white shadow-md flex justify-between items-center sticky top-0 z-50">
+      
       <div className="cursor-pointer" onClick={() => navigate('/home')}>
         <h1 className="text-4xl font-black text-slate-800 tracking-tight">
           RAVI<span className="text-white">TECH</span>
@@ -58,7 +49,7 @@ const Navbar = ({ onSearch }) => {
       
       <div className="flex items-center gap-6">
         <div 
-          onClick={handleProfileClick}
+          onClick={() => navigate('/profile')}
           className="hidden lg:flex items-center gap-2 bg-blue-700 px-4 py-2 rounded-full cursor-pointer hover:bg-slate-800 transition-all border border-blue-500"
         >
           <PersonOutlineIcon fontSize="small" />
