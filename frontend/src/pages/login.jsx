@@ -14,10 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // connecting to the login endpoint
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+      const res = await axios.post("http://3.95.228.87:5000/api/auth/login", formData);
 
       if (res.status === 200) {
         toast.success(`Welcome back, ${res.data.user.name}! 👋`);
