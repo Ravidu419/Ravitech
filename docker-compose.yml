@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Backend Service
+  backend:
+    build: ./backend
+    container_name: techshop-backend-api
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    networks:
+      - techshop-network
+
+  # Frontend Service
+  frontend:
+    build: ./frontend
+    container_name: techshop-frontend-web
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - techshop-network
+
+# Networking to let containers talk to each other
+networks:
+  techshop-network:
+    driver: bridge
