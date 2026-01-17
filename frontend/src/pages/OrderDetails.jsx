@@ -66,7 +66,7 @@ const OrderDetails = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/api/orders/create", orderData);
+      const res = await axios.post("http://3.95.228.87:5000/api/orders/create", orderData);
       
       if (res.status === 201) {
         clearCart();

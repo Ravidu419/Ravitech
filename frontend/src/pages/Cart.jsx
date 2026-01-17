@@ -70,7 +70,13 @@ const Cart = () => {
             <div className="lg:col-span-2 space-y-4">
               {cart.map((item) => (
                 <div key={item._id} className="bg-white p-5 rounded-2xl shadow-sm flex items-center gap-6 border border-transparent hover:border-blue-100 transition-all">
-                  <img src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded-xl bg-slate-50" />
+                  {/* Fixed Image Source for Frontend public folder */}
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-24 h-24 object-cover rounded-xl bg-slate-50" 
+                    onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=No+Image'; }}
+                  />
                   
                   <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
