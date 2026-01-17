@@ -33,7 +33,7 @@ const Navbar = ({ onSearch }) => {
       
       <div className="cursor-pointer" onClick={() => navigate('/home')}>
         <h1 className="text-4xl font-black text-slate-800 tracking-tight">
-          RAVI<span className="text-white">TECH</span>
+          RAVIDU<span className="text-white">TECH</span>
         </h1>
       </div>
 
