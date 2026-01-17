@@ -24,14 +24,14 @@ const Profile = () => {
   }, [navigate]);
 
   // fetch previous orders for this user
-  const fetchOrders = async (userId) => {
-    try {
-      const res = await axios.get(`http://localhost:5000/api/orders/myorders/${userId}`);
-      setOrders(res.data);
-    } catch (err) {
-      console.error("Fetch error:", err.message);
-    }
-  };
+ const fetchOrders = async (userId) => {
+  try {
+    const res = await axios.get(`http://3.95.228.87:5000/api/orders/myorders/${userId}`);
+    setOrders(res.data);
+  } catch (err) {
+    console.error("Fetch error:", err.message);
+  }
+};
 
   const handleUpdate = async (e) => {
     e.preventDefault();
