@@ -81,9 +81,10 @@ const Home = () => {
               
               <div className="relative h-60 bg-slate-50 flex items-center justify-center p-8 overflow-hidden">
                 <img 
-                  src={`http://3.95.228.87:5000${product.image}`} 
+                  src={product.image}  
                   alt={product.name} 
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
+                  onError={(e) => { e.target.src = 'https://via.placeholder.com/300?text=No+Image'; }}
                 />
               </div>
 
