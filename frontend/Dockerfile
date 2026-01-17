@@ -16,6 +16,8 @@ RUN npm run build
 # Stage 2: Serve stage using Nginx
 FROM nginx:stable-alpine
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy built files from the build stage to Nginx web directory
 # Using /app/dist for Vite (change to /app/build if using Create React App)
 COPY --from=build /app/dist /usr/share/nginx/html
