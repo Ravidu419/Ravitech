@@ -15,11 +15,10 @@ const Home = () => {
   const navigate = useNavigate();
 
  useEffect(() => {
+    // fetching all products from backend on mount
     const fetchProducts = async () => {
       try {
-        
         const res = await axios.get("http://3.95.228.87:5000/api/products");
-        
         setProducts(res.data);
         setFilteredProducts(res.data); 
       } catch (err) {
@@ -81,7 +80,7 @@ const Home = () => {
             <div key={product._id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 flex flex-col">
               
               <div className="relative h-60 bg-slate-50 flex items-center justify-center p-8 overflow-hidden">
-              <img 
+                <img 
                   src={`http://3.95.228.87:5000${product.image}`} 
                   alt={product.name} 
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
@@ -91,7 +90,7 @@ const Home = () => {
               <div className="p-6 flex flex-grow flex-col">
                 <span className="text-blue-600 font-bold text-[10px] uppercase tracking-widest mb-1">{product.category}</span>
                 <h3 className="text-lg font-black text-slate-800 mb-1 leading-tight truncate">{product.name}</h3>
-                <p className="text-lg font-bold text-slate-400 mb-6">Rs. {product.price.toLocaleString()}</p>
+                <p className="text-lg font-bold text-slate-400 mb-6">{product.price}</p>
                 
                 <div className="mt-auto flex gap-3">
                   <button 

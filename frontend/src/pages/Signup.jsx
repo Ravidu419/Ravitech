@@ -15,7 +15,7 @@ const Signup = () => {
     }
 
     try {
-      
+      // connecting to the signup endpoint on AWS
       const res = await axios.post("http://3.95.228.87:5000/api/auth/signup", formData);
 
       if (res.status === 201 || res.data.message === "Success") {
@@ -23,6 +23,7 @@ const Signup = () => {
         navigate('/login');
       }
     } catch (err) {
+      // showing backend error message or default
       toast.error(err.response?.data?.message || "Signup Failed");
       console.error("Signup error:", err);
     }
@@ -33,7 +34,6 @@ const Signup = () => {
       <div className="max-w-md w-full bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-100">
         <h2 className="text-3xl font-black text-slate-800 mb-2 text-center">Create Account</h2>
         <p className="text-slate-400 mb-8 font-medium text-center">Join <span className="text-blue-600 mb-8 font-bold text-center">RAVI</span><span className="text-slate-600 mb-8 font-bold text-center">TECH.lk</span>  today!</p>
-        
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <input 
