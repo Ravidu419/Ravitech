@@ -14,11 +14,12 @@ const Home = () => {
   const { addToCart, cart } = useCart();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // fetching all products from backend on mount
+ useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/products');
+        
+        const res = await axios.get("http://3.95.228.87:5000/api/products");
+        
         setProducts(res.data);
         setFilteredProducts(res.data); 
       } catch (err) {
@@ -26,7 +27,7 @@ const Home = () => {
       }
     };
     fetchProducts();
-  }, []);
+}, []);
 
   // filter products based on user search query
   const handleSearch = (query) => {
@@ -80,8 +81,8 @@ const Home = () => {
             <div key={product._id} className="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 flex flex-col">
               
               <div className="relative h-60 bg-slate-50 flex items-center justify-center p-8 overflow-hidden">
-                <img 
-                  src={product.image} 
+              <img 
+                  src={`http://3.95.228.87:5000${product.image}`} 
                   alt={product.name} 
                   className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" 
                 />

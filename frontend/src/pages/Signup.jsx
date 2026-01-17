@@ -16,8 +16,8 @@ const Signup = () => {
 
     try {
       
-      const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
-      
+      const res = await axios.post("http://3.95.228.87:5000/api/auth/signup", formData);
+
       if (res.status === 201 || res.data.message === "Success") {
         toast.success("Account Created Successfully! 🎉");
         navigate('/login');

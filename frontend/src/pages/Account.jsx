@@ -23,7 +23,7 @@ const Profile = () => {
   // fetching user specific orders from backend
   const fetchOrders = async (userId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/orders/myorders/${userId}`);
+      const res = await axios.get(`http://3.95.228.87:5000/api/orders/myorders/${userId}`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching history:", err.message);
