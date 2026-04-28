@@ -20,7 +20,7 @@ const Profile = () => {
     }
   }, [navigate]);
 
-  // fetching user specific orders from backend
+  
   const fetchOrders = async (userId) => {
     try {
       const res = await axios.get(`http://3.95.228.87:5000/api/orders/myorders/${userId}`);
