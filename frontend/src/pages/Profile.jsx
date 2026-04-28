@@ -23,7 +23,6 @@ const Profile = () => {
     }
   }, [navigate]);
 
-  // fetch previous orders for this user
  const fetchOrders = async (userId) => {
   try {
     const res = await axios.get(`http://3.95.228.87:5000/api/orders/myorders/${userId}`);
