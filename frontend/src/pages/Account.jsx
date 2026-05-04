@@ -43,7 +43,7 @@ const Profile = () => {
       <Navbar />
       <div className="max-w-4xl mx-auto p-6 mt-10">
         
-        {/* User Info Header */}
+       
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-10 border border-slate-100">
           <div className="bg-blue-600 h-24"></div>
           <div className="px-8 pb-8 text-center md:text-left">
@@ -62,7 +62,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Order History List */}
+        
         <h3 className="text-2xl font-black text-slate-800 mb-6">Recent Orders 🕒</h3>
         <div className="space-y-4">
           {orders.length === 0 ? (
