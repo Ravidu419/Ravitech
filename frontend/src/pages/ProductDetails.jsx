@@ -26,6 +26,7 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
+  
   if (!product) return <div className="p-10 text-center font-bold">Loading...</div>;
   return (
     <div className="min-h-screen bg-white">

@@ -23,7 +23,6 @@ const Profile = () => {
     }
   }, [navigate]);
 
-  // fetch previous orders for this user
  const fetchOrders = async (userId) => {
   try {
     const res = await axios.get(`http://3.95.228.87:5000/api/orders/myorders/${userId}`);
@@ -66,7 +65,7 @@ const Profile = () => {
       <Navbar />
       <div className="max-w-4xl mx-auto p-6 mt-10">
         
-        {/* User Profile Card */}
+        
         <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-10 border border-slate-100">
           <div className="bg-blue-600 h-32"></div>
           <div className="px-8 pb-8">
@@ -116,7 +115,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Orders List Section */}
+        
         <h3 className="text-2xl font-black text-slate-800 mb-6 font-mono tracking-tight">ORDER HISTORY</h3>
         <div className="space-y-4">
           {orders.length === 0 ? (

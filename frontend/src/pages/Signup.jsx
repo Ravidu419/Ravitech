@@ -15,7 +15,6 @@ const Signup = () => {
     }
 
     try {
-      // connecting to the signup endpoint on AWS
       const res = await axios.post("http://3.95.228.87:5000/api/auth/signup", formData);
 
       if (res.status === 201 || res.data.message === "Success") {
@@ -23,7 +22,6 @@ const Signup = () => {
         navigate('/login');
       }
     } catch (err) {
-      // showing backend error message or default
       toast.error(err.response?.data?.message || "Signup Failed");
       console.error("Signup error:", err);
     }
@@ -68,7 +66,7 @@ const Signup = () => {
           </button>
         </form>
         <p className="mt-6 text-center text-slate-500">
-          Already have an account? <span onClick={() => navigate('/login')} className="text-blue-600 font-bold cursor-pointer hover:underline">Login</span>
+          Already Have an account? <span onClick={() => navigate('/login')} className="text-blue-600 font-bold cursor-pointer hover:underline">Login</span>
         </p>
       </div>
     </div>
