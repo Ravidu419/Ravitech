@@ -16,8 +16,8 @@ const OrderDetails = () => {
     country: "Sri Lanka",
   });
   const [paymentMethod, setPaymentMethod] = useState("COD");
+  // Calculate total amount from cart items
 
-  // total calculation logic
   const calculateTotal = () => {
     return cart.reduce((total, item) => {
       const price =
@@ -57,6 +57,7 @@ const OrderDetails = () => {
       product: item._id,
     }));
 
+    // prepare order data
     const orderData = {
       user: user._id,
       orderItems: formattedOrderItems,

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// User profile page showing user details and order history
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);

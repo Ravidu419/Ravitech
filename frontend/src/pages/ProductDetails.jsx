@@ -28,7 +28,6 @@ const ProductDetails = () => {
 
   
   if (!product) return <div className="p-10 text-center font-bold">Loading...</div>;
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -66,6 +65,7 @@ const ProductDetails = () => {
       </div>
     </div>
   );
+
 };
 
 export default ProductDetails;

@@ -15,7 +15,6 @@ const Home = () => {
   const navigate = useNavigate();
 
  useEffect(() => {
-    // fetching all products from backend on mount
     const fetchProducts = async () => {
       try {
         const res = await axios.get("http://3.95.228.87:5000/api/products");
@@ -28,7 +27,7 @@ const Home = () => {
     fetchProducts();
 }, []);
 
-  // filter products based on user search query
+  // filter products based on user search query.
   const handleSearch = (query) => {
     const filtered = products.filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase()) ||
