@@ -13,18 +13,18 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // connecting to the login endpoint
+      
       const res = await axios.post("http://3.95.228.87:5000/api/auth/login", formData);
 
       if (res.status === 200) {
         toast.success(`Welcome back, ${res.data.user.name}! 👋`);
         
-        // save user details for profile and checkout
+        
         localStorage.setItem("user", JSON.stringify(res.data.user));
         navigate("/home");
       }
     } catch (err) {
-      // showing backend error message or default
+     
       toast.error(err.response?.data?.message || "Login Failed! Try again.");
     }
   };

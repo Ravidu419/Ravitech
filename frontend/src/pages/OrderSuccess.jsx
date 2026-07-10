@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
+// This page is shown after a successful order placement
 const OrderSuccess = () => {
   const navigate = useNavigate();
 
