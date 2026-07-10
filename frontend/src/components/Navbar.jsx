@@ -28,6 +28,7 @@ const Navbar = ({ onSearch }) => {
     window.location.href = '/login'; 
   };
 
+  //responsive Nav bar
   return (
     <nav className="bg-blue-600 p-4 text-white shadow-md flex justify-between items-center sticky top-0 z-50">
       
