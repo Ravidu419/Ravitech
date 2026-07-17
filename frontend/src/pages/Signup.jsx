@@ -5,15 +5,25 @@ import toast from 'react-hot-toast';
 
 const Signup = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Full name is required.";
+    else if (formData.name.trim().length < 2) newErrors.name = "Name must be at least 2 characters.";
+    if (!formData.email) newErrors.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Enter a valid email address.";
+    if (!formData.password) newErrors.password = "Password is required.";
+    else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
+    return newErrors;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.email || !formData.password) {
-      return toast.error("Please fill all fields!");
-    }
-
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) return setErrors(newErrors);
+    setErrors({});
     try {
       const res = await axios.post("http://3.95.228.87:5000/api/auth/signup", formData);
 
@@ -37,26 +47,26 @@ const Signup = () => {
           <input 
             type="text" 
             placeholder="Full Name" 
-            className="w-full p-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-500 outline-none"
+            className={`w-full p-4 bg-slate-50 rounded-2xl border outline-none focus:ring-2 ${errors.name ? 'border-red-400 focus:ring-red-300' : 'border-transparent focus:ring-blue-500'}`}
             onChange={(e) => setFormData({...formData, name: e.target.value})}
-            required
           />
+          {errors.name && <p className="text-red-500 text-xs ml-1">{errors.name}</p>}
           <input 
             type="email" 
             placeholder="Email Address" 
             autoComplete="off"
-            className="w-full p-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-500 outline-none"
+            className={`w-full p-4 bg-slate-50 rounded-2xl border outline-none focus:ring-2 ${errors.email ? 'border-red-400 focus:ring-red-300' : 'border-transparent focus:ring-blue-500'}`}
             onChange={(e) => setFormData({...formData, email: e.target.value})}
-            required
           />
+          {errors.email && <p className="text-red-500 text-xs ml-1">{errors.email}</p>}
           <input 
             type="password" 
             placeholder="Password"
             autoComplete="new-password" 
-            className="w-full p-4 bg-slate-50 rounded-2xl border-none focus:ring-2 focus:ring-blue-500 outline-none"
+            className={`w-full p-4 bg-slate-50 rounded-2xl border outline-none focus:ring-2 ${errors.password ? 'border-red-400 focus:ring-red-300' : 'border-transparent focus:ring-blue-500'}`}
             onChange={(e) => setFormData({...formData, password: e.target.value})}
-            required
           />
+          {errors.password && <p className="text-red-500 text-xs ml-1">{errors.password}</p>}
           
           <button 
             type="submit" 
