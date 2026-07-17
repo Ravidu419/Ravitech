@@ -8,10 +8,23 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.email) newErrors.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Enter a valid email address.";
+    if (!formData.password) newErrors.password = "Password is required.";
+    else if (formData.password.length < 6) newErrors.password = "Password must be at least 6 characters.";
+    return newErrors;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const newErrors = validate();
+    if (Object.keys(newErrors).length > 0) return setErrors(newErrors);
+    setErrors({});
     try {
       
       const res = await axios.post("http://3.95.228.87:5000/api/auth/login", formData);
@@ -52,12 +65,12 @@ const Login = () => {
               </div>
               <input
                 type="email"
-                required
                 placeholder="name@company.com"
-                className="w-full bg-slate-50 border border-slate-200 px-12 py-4 rounded-2xl text-slate-800 outline-none focus:border-blue-600 focus:bg-white transition-all"
+                className={`w-full bg-slate-50 border px-12 py-4 rounded-2xl text-slate-800 outline-none focus:bg-white transition-all ${errors.email ? 'border-red-400 focus:border-red-400' : 'border-slate-200 focus:border-blue-600'}`}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
             </div>
+            {errors.email && <p className="text-red-500 text-xs ml-1">{errors.email}</p>}
           </div>
 
           <div className="space-y-2">
@@ -68,12 +81,12 @@ const Login = () => {
               </div>
               <input
                 type="password"
-                required
                 placeholder="••••••••"
-                className="w-full bg-slate-50 border border-slate-200 px-12 py-4 rounded-2xl text-slate-800 outline-none focus:border-blue-600 focus:bg-white transition-all"
+                className={`w-full bg-slate-50 border px-12 py-4 rounded-2xl text-slate-800 outline-none focus:bg-white transition-all ${errors.password ? 'border-red-400 focus:border-red-400' : 'border-slate-200 focus:border-blue-600'}`}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
             </div>
+            {errors.password && <p className="text-red-500 text-xs ml-1">{errors.password}</p>}
           </div>
 
           <button
